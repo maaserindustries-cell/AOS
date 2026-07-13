@@ -1,0 +1,74 @@
+{
+  "system": {
+    "id": "pmos",
+    "name": "PMOS",
+    "fullName": "Promotional Media Operating System",
+    "version": "0.1",
+    "purpose": "Create, sell, fulfill, and manage promotional media campaigns."
+  },
+  "objects": [
+    "location",
+    "campaignType",
+    "campaignEdition",
+    "layoutTemplate",
+    "designTemplate",
+    "position",
+    "category",
+    "advertiser",
+    "reservation",
+    "payment",
+    "artworkSubmission",
+    "proof",
+    "distributionRoute",
+    "workflow"
+  ],
+  "workflowStates": [
+    "draft",
+    "selling",
+    "reserved",
+    "artwork_received",
+    "proof_sent",
+    "approved",
+    "print_ready",
+    "printed",
+    "mailed",
+    "completed"
+  ],
+  "campaignTypes": [
+    {
+      "id": "restaurant-postcard",
+      "mailboxes": 2500,
+      "exclusiveByCategory": true,
+      "layout": {
+        "front": {
+          "premium": 3,
+          "micro": 6
+        },
+        "back": {
+          "standard": 11
+        }
+      },
+      "pricing": {
+        "premium": 199,
+        "standard": 149,
+        "micro": 25
+      }
+    },
+    {
+      "id": "service-postcard",
+      "mailboxes": 5000,
+      "exclusiveByCategory": true,
+      "layout": {
+        "front": {
+          "equal": 8
+        },
+        "back": {
+          "equal": 8
+        }
+      },
+      "pricing": {
+        "equal": 500
+      }
+    }
+  ]
+}
