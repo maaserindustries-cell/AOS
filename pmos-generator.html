@@ -1,1 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 
+  <title>PMOS Campaign Generator</title>
+
+  <link rel="stylesheet" href="pmos-generator.css">
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div>
+      <strong>PMOS</strong>
+      <span>Campaign Generator</span>
+    </div>
+
+    <a href="index.html">AOS Discovery</a>
+  </header>
+
+
+  <main class="page-shell">
+
+    <section class="intro">
+      <p class="eyebrow">AOS Generator Module</p>
+
+      <h1>Create a promotional-media campaign.</h1>
+
+      <p>
+        Choose a campaign template, enter the local campaign data,
+        and generate a machine-readable campaign definition.
+      </p>
+    </section>
+
+
+    <form id="campaign-form">
+
+      <section class="panel">
+        <h2>Campaign identity</h2>
+
+        <label>
+          Campaign type
+
+          <select id="campaign-type" name="campaignType" required>
+            <option value="">Choose a campaign type</option>
+            <option value="restaurant">Restaurant Promotional Postcard</option>
+            <option value="service">Service Business Promotional Postcard</option>
+          </select>
+        </label>
+
+
+        <div class="two-column">
+
+          <label>
+            City
+            <input type="text" name="city" placeholder="St. Augustine" required>
+          </label>
+
+          <label>
+            State
+            <input type="text" name="state" placeholder="FL" maxlength="2" required>
+          </label>
+
+        </div>
+
+
+        <label>
+          Edition name
+          <input
+            type="text"
+            name="edition"
+            placeholder="Founders Edition #001"
+            required
+          >
+        </label>
+
+
+        <label>
+          Campaign title
+          <input
+            type="text"
+            name="campaignName"
+            placeholder="St. Augustine Restaurant Deals"
+          >
+        </label>
+      </section>
+
+
+      <section class="panel">
+        <h2>Distribution</h2>
+
+        <div class="two-column">
+
+          <label>
+            Mailbox count
+            <input type="number" name="mailboxes" min="1" required>
+          </label>
+
+          <label>
+            Mailing date
+            <input type="date" name="mailDate">
+          </label>
+
+        </div>
+
+
+        <label>
+          ZIP codes or route notes
+          <textarea
+            name="routes"
+            rows="4"
+            placeholder="32080, 32084, 32086"
+          ></textarea>
+        </label>
+      </section>
+
+
+      <section class="panel">
+        <h2>Pricing</h2>
+
+        <div id="restaurant-pricing" hidden>
+
+          <div class="three-column">
+
+            <label>
+              Premium front
+              <input type="number" name="premiumPrice" min="0" value="199">
+            </label>
+
+            <label>
+              Standard back
+              <input type="number" name="standardPrice" min="0" value="149">
+            </label>
+
+            <label>
+              Micro mention
+              <input type="number" name="microPrice" min="0" value="25">
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div id="service-pricing" hidden>
+
+          <label>
+            Price per equal position
+            <input type="number" name="equalPrice" min="0" value="500">
+          </label>
+
+        </div>
+
+      </section>
+
+
+      <section class="panel">
+        <h2>Category exclusivity</h2>
+
+        <p>
+          Enter one category per line. A paid advertiser locks both
+          the selected position and category for this campaign edition.
+        </p>
+
+        <textarea
+          name="categories"
+          id="categories"
+          rows="12"
+          placeholder="Pizza&#10;Coffee&#10;Seafood"
+        ></textarea>
+      </section>
+
+
+      <section class="panel">
+        <h2>Campaign assets</h2>
+
+        <p>
+          These are file paths or future hosted URLs. The files themselves
+          are not uploaded by this generator yet.
+        </p>
+
+        <label>
+          Background or hero image
+          <input type="text" name="background" placeholder="Images/ad-card-photo.jpg">
+        </label>
+
+        <label>
+          Front preview
+          <input type="text" name="frontPreview" placeholder="Images/ad-card-front.jpg">
+        </label>
+
+        <label>
+          Back preview
+          <input type="text" name="backPreview" placeholder="Images/ad-card-back.jpg">
+        </label>
+
+        <label>
+          Route map
+          <input type="text" name="routeMap" placeholder="Images/ad-route-map.jpg">
+        </label>
+      </section>
+
+
+      <section class="panel">
+        <h2>Stripe checkout</h2>
+
+        <div id="restaurant-stripe" hidden>
+
+          <label>
+            Premium front Stripe link
+            <input type="url" name="premiumStripe">
+          </label>
+
+          <label>
+            Standard back Stripe link
+            <input type="url" name="standardStripe">
+          </label>
+
+          <label>
+            Micro mention Stripe link
+            <input type="url" name="microStripe">
+          </label>
+
+        </div>
+
+
+        <div id="service-stripe" hidden>
+
+          <label>
+            Equal-position Stripe link
+            <input type="url" name="equalStripe">
+          </label>
+
+        </div>
+
+      </section>
+
+
+      <section class="panel">
+        <h2>Generate</h2>
+
+        <p>
+          PMOS will create all inventory positions automatically from the
+          selected template.
+        </p>
+
+        <button class="primary-button" type="submit">
+          Generate Campaign Definition
+        </button>
+      </section>
+
+    </form>
+
+
+    <section class="result-panel" id="result-panel" hidden>
+
+      <div class="result-heading">
+
+        <div>
+          <p class="eyebrow">Generated Campaign</p>
+          <h2>Your campaign definition is ready.</h2>
+        </div>
+
+        <div class="result-actions">
+          <button id="copy-json" type="button">Copy JSON</button>
+          <button id="download-json" class="primary-button" type="button">
+            Download campaign.json
+          </button>
+        </div>
+
+      </div>
+
+      <pre id="json-output"></pre>
+
+    </section>
+
+  </main>
+
+
+  <script src="pmos-generator.js"></script>
+
+</body>
+</html>
