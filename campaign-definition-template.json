@@ -1,1 +1,41 @@
+{
+  "campaign": {
+    "id": "",
+    "name": "",
+    "type": "",
+    "edition": "",
+    "city": "",
+    "state": "",
 
+    "status": "draft",
+
+    "mailboxes": 0,
+
+    "mailDate": "",
+
+    "layout": "",
+
+    "pricing": {},
+
+    "categories": [],
+
+    "positions": [],
+
+    "assets": {
+      "background": "",
+      "frontPreview": "",
+      "backPreview": "",
+      "routeMap": ""
+    },
+
+    "stripe": {},
+
+    "workflow": {
+      "artwork": "pending",
+      "proof": "pending",
+      "payment": "pending",
+      "print": "pending",
+      "distribution": "pending"
+    }
+  }
+}
